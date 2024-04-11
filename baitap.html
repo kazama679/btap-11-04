@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    The word is: <t id="start">***</t>
+    <input type="text" id="input">
+    Rermaining guess: <t id="number">5</t>
+    <button id="button">Guess</button>
+    <button id="newGame" >Chơi lại</button>
+    <script>
+        let start = document.getElementById("start");
+        let input = document.getElementById("input");
+        let button = document.getElementById("button");
+        let number = document.getElementById("number");
+        let newGame = document.getElementById("newGame");
+        newGame.addEventListener("click", newGame1);
+        function newGame1() {
+            input.value = "";
+            newGame.style.display = "none";
+            button.style.display = "block";
+            let text = "";
+            let arr = ["hoang", "hao", "hang", "vu", "anh", "thu", "tai"];
+            let random = arr[Math.floor(Math.random() * 7)];
+            console.log(random);
+            for (let i = 0; i < random.length; i++) {
+                text += "*";
+            }
+            start.innerHTML = text;
+            let i = 5;
+            number.innerHTML = i;
+            button.addEventListener("click", checkDapAn);
+            function checkDapAn() {
+                if (input.value === "") {
+                    alert("Vui lòng nhập dữ liệu");
+                    return;
+                } else if (input.value == random) {
+                    start.innerHTML = input.value;
+                    input.value = "";
+                    newGame.style.display = "block";
+                    button.style.display = "none";
+                } else {
+                    i--;
+                    number.innerHTML = i;
+                    input.value = "";
+                    if (i === 0) {
+                        alert("Bạn đã thua cuộc, chơi lại?");
+                        input.value = "";
+                        newGame1();
+                    }
+                }
+            }
+        }
+        newGame1();
+    </script>
+</body>
+
+</html>
